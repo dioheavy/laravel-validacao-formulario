@@ -18,7 +18,7 @@ criar varias tags iguais ex div*3 sera criado
 <div></div>
 <div></div>
 
-
+html:5 (cria a estrutura padrão do html)
 
 Abrir o terminar
 Teclas Ctrl + '
