@@ -4,21 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProducts extends Migration
+class CreateDepartaments extends Migration
 {
     /**
-     * Run the migrations..
+     * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            //$table->id();
+        Schema::create('departments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('stock');
-            $table->double('price');
             $table->string('description')->nullable();
             $table->timestamps();
         });
@@ -31,6 +28,6 @@ class CreateProducts extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('departments');
     }
 }
