@@ -27,8 +27,8 @@ class AddBrandToProducts extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign(['brand_id']);
-            $table->dropColumn(['brand_id']);
+            $table->dropForeign(['brand_id']); // Primeiro deleta a chave estrangeira
+            $table->dropColumn(['brand_id']); // Segundo, deleta a coluna
         });
     }
 }
