@@ -1,0 +1,44 @@
+Projetos Laravel serão salvos na pasta 'D:\Laravel'
+
+Criando um projeto Laravel:
+Abrir o Windows PowerShell
+Navegar até a pasta 'D:\Laravel'
+Digita ro comando: laravel new nome-do-projeto
+Ex: laravel new projeto-inicial
+* Sera criada uma pasta dentro de Laravel com o nome projeto-inicial contendo todos os arquivos do laravel
+
+Para testar, é preciso iniciar o php artisan server
+Dentro do Windows PowerShell, prompet de comando ou no Terminal do VS Code, acesse a pasta do projeto onde foi criado o projeto laravel exemplo D:\Laravel\projeto-laravel e digite o comando:
+php artisan serve
+
+* Ele vai liberar a porta 8000 e o projeto podera ser acessado de duas formas:
+http://127.0.0.1:8000
+localhost:8000
+
+Obs. com o php artisan iniciado, não é preciso iniciar o servidor Xamp ou Ampps
+
+
+Para instalar dependecias se tiver problema com o comando 'preset'
+utilizar este outro no lugar: composer require laravel/ui
+Exemplo: acessar a pasta do projeto e digitar o comando acima e para instalar no caso o exemplo usado foi para instalar o bootstrap, o comando usado foi: php artisan ui bootstrap
+Fonte: https://laracasts.com/discuss/channels/laravel/php-artisan-preset-dont-work-installing-a-template
+
+** importante:
+Para o bootstrap no Laravel Versão 6.0 em diante, é necessário instalar um pacote chamando laravel-ui dentro da pasta do projeto:
+composer require laravel/ui
+php artisan ui bootstrap
+npm install && npm run dev
+
+
+
+Redis / memcached
+* O Redis oferece um conjunto de estruturas versáteis de dados na memória que permite a fácil criação de várias aplicações personalizadas. Os principais casos de uso do Redis incluem cache, gerenciamento de sessões, PUB/SUB e classificações. É o armazenamento de chave-valor mais conhecido atualmente.
+
+* Memcached tem como objetivo oferecer um sistema de cache de memória distribuída. Ele é frequentemente usado para acelerar sites dinâmicos através do cache de dados e objetos na memória RAM. É muito eficiente para reduzir o número de vezes que uma fonte de dados externa (como um banco de dados ou API, por exemplo) deve ser lida.
+
+Comandos uteis
+* php artisan (Exibe todos os comandos do artisan)
+* php artisan serve (serve para iniciar o servidor para rodar as paginas, obs. executar dentro da pasta do projeto)
+* php artisan make:controller (serve para criar o controlador do MVC, obs tem que digitar o nome do controlador desejado ex: php artisan make:controller MeuControlador) sera criado dentro de app/http/controllers
+* php artisan make:controller --resource (Cria uma controladora com varios metodos padrão que podem ser chamados atraves de uma unica rota )
+

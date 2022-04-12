@@ -1,0 +1,4 @@
+Abrir a pasta do projeto  no ex. projeto-inicial e editar o arquivo .env
+
+*** Importante *** 
+Em alguns casos nas versões mais antigas do laravel, esse arquivo pode estar dentro da pasta tests no caso da versão 5.8 do laravel 

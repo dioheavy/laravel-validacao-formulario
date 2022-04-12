@@ -1,0 +1,27 @@
+para criar divs ja com a classe 
+div.nome_da_classe
+ex:
+div.info sera criado
+<div class="info"></div>
+
+pode se criar com profundidade ex:
+div.info>div.error>p.teste
+
+<div class="info">
+   <div class="error">
+	<p class="teste"></p>
+   </div>
+</div>
+
+criar varias tags iguais ex div*3 sera criado
+<div></div>
+<div></div>
+<div></div>
+
+
+
+Abrir o terminar
+Teclas Ctrl + '
+
+Selecionar todas as palavaras iguais pra renomear em lot
+selecione o texto ou palavra e pressione as teclas Ctrl + f2 e digitar o novo texto
