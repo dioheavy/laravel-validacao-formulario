@@ -37,7 +37,10 @@ Para visualizar a informação inserida na Tabela 'brands' diretamente pelo Tink
 
 	'Brand::where('name','like',"$name")->get()' ** Importante: Quando for utilizar uma variavel, utilizar aspas dupla para o Tiker entender que é pra procurar pelo valor que esta dentro da variavel, se colocar aspas simples, o Tiker vai procurar pela palavra dentro das aspas '$name' e não pelo valor que esta dentro da variavel.
 
+	'Brand::OrderBy('name')->get()' ** Ordernar o resultdo da query pelo 'nome'
+	Brand::OrderBy('name','desc')->get() ** Ordernar de forma Decrescente	
 
+	
 
 
 
