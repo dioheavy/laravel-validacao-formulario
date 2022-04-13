@@ -11,13 +11,15 @@ Obs. para ver todos os comandos basta digitar 'php artisan'
 	'use \App\Models\Brand'
 	'Brand::all()'
 
---> Inserindo dados no banco de dados 'laravel_produtos' na tabela 'brands' com o Tinker através de códigos um a um
+*** Todos os comandos utilizados no Tinker, pode ser utizado no php normalmente ***
+
+*** Inserindo dados no banco de dados 'laravel_produtos' na tabela 'brands' com o Tinker através de códigos um a um
 $brand = new Brand;
 $brand->name = 'Sansung'
 $brand->sabe()
 
 Para visualizar a informação inserida na Tabela 'brands' diretamente pelo Tinker
---> 'Brand::all()'
+--> 'Brand::all()' ** Obs. comando retorna uma collection, onde podemos utilizar diversas collections nativa do Laravel, veja mais informações na nocumentação: https://laravel.com/docs/8.x/collections
 
 --> Inserindo Dados de forma resumida na tabela Brands utilizando o Tinker:
 	'use \App\Models\Brand'
@@ -38,9 +40,42 @@ Para visualizar a informação inserida na Tabela 'brands' diretamente pelo Tink
 	'Brand::where('name','like',"$name")->get()' ** Importante: Quando for utilizar uma variavel, utilizar aspas dupla para o Tiker entender que é pra procurar pelo valor que esta dentro da variavel, se colocar aspas simples, o Tiker vai procurar pela palavra dentro das aspas '$name' e não pelo valor que esta dentro da variavel.
 
 	'Brand::OrderBy('name')->get()' ** Ordernar o resultdo da query pelo 'nome'
-	Brand::OrderBy('name','desc')->get() ** Ordernar de forma Decrescente	
+	'Brand::OrderBy('name','desc')->get()' ** Ordernar de forma Decrescente	
 
-	
+	'Brand::all()->pluck('name')' ** Exemplo de pesquisa retornando apenas o 'nome' utilizando collection 'pluck()'
+	--> Outras collection pode ser acrescentada como: ->toArray(), ->toJson etc..
+	EX:'Brand::all()->pluck('name')->toArray()' ou 'Brand::all()->toJson()'
+
+
+*** Update registros com o Tinker ***
+	'$brand = Brand::find(2)' ** Pega os registros de ID 2
+	'Brand::fill(['name'=>'Microlab'])' ** Ordernar o resultdo da query pelo 'nome'
+	$brand->sabe()
+
+
+*** Deletando registros com o Tinker ***	
+	'$brand = Brand::find(1)' ** Pega os registros de ID 1
+	'$brand->delete()' ** Esta collection deleta o registro armazenado em $brand
+	** Outra opção **
+	'Brand::destroy(3) ** 3 é o id da brand que eu quero deletar **
+	'Brand::where('id', '>', 3)->delete()' ** Sera deletado todos os registros que o id seja maior que 3 
+
+
+*** Soft Delete ***
+	** Obs. não deleta o registro do banco, porém, adicona uma flag em um campo no banco para que o laravel entenda que aquele registro foi deletado, mas não apagado do banco.
+
+	** Obs. é preciso incluir 'use SoftDeletes' dentro da Class na Model, neste caso a model usada é a Brand.php
+	** No caso de utilizar Migrations, é preciso incluir também na function up o campo: $table->SoftDeletes();
+
+	$brands = Brand::All() ** Pega todas os registros e cria um array na variavel $brands
+	$brands[0]->delete() ** Esse comando vai apagar o registro que esta na posição 0 do array, mas não vai deletar na tabela, ao inves disso, vai preencher o campo deleted_at com a data de quando ele foi apagado
+
+**Obs. ao utilizar o comando Brand::All() este produto não sera exibido na listagem, porém se quiser ver uma lista com todos os produtos mesmo esse que foi marcado como deletado, pode usar o comando: Brand::withTrashed()->get()
+
+** Para retornar somente os registros que foram apagados, pode utilizar o comando: $brands = Brand::onlyTrashed()->get()
+** Para deletar o registro na tabela pode utilizar o comando 'Brand::find(2)->forceDelete()' este comando vai deletar da tabela o registro com id 2
+
+
 
 
 
