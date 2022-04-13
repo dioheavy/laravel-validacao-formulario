@@ -1,0 +1,25 @@
+Obs. para ver todos os comandos basta digitar 'php artisan'
+
+*** ARTISAN MAKE *****
+1 - Migrations:
+
+2 - Model: 'php artisan make:model nome-da-model'
+
+3 - Tinker (Terminal do Artisan) : 'php artisan tinker' e para sair do Tinker, digitar 'quit'
+
+--> Antes de tudo é preciso acessar a pasta onde a model foi criada com o comando: 'use' exemplo: O arquivo Brand.php esta dentro da pasta App\Models, então o comando deve ficar assim:
+	'use \App\Models\Brand'
+	'Brand::all()'
+
+--> Inserindo dados no banco de dados 'laravel_produtos' na tabela 'brands' com o Tinker através de códigos um a um
+$brand = new Brand;
+$brand->name = 'Sansung'
+$brand->sabe()
+
+Para visualizar a informação inserida na Tabela 'brands' diretamente pelo Tinker
+--> 'Brand::all()'
+
+--> Inserindo Dados de forma resumida na tabela Brands utilizando o Tinker:
+	'use \App\Models\Brand'
+	'$brand = Brand::create(["name"=>"Acer"]);'
+-->  
