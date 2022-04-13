@@ -22,4 +22,22 @@ Para visualizar a informação inserida na Tabela 'brands' diretamente pelo Tink
 --> Inserindo Dados de forma resumida na tabela Brands utilizando o Tinker:
 	'use \App\Models\Brand'
 	'$brand = Brand::create(["name"=>"Acer"]);'
--->  
+-->
+
+*** Consultas com o Tinker (Otima opçao para não ter que abrir o phpmyadmin e poder consultar diretamente no VS Code) ***
+-- Utilizando como exemplo a Tabela Brands
+	'php artisan tinker'
+	'use \App\Models\Brand'
+	'Brand::all()'		** Obs. all() retorna um array com todos os registros que estão na tabela **
+	'Brand::find(1)'	** Este retorna apenas os registros que estão gravados com o ID 1 **
+	'Brand::find([1,2])	** Este retorna os registros com os IDs informados no array ***
+	'Brand::where('id',1)->get()' ** Esta outra forma pra montar uma consulta tipo SQL
+	'Brand::where('name','LG')->get()' ** Será retornado todos os registros com o nome LG
+	'Brand::where('name','like','%e')->get()' ** Sera retornado registro que o nome termina com a letra 'e'
+
+	'Brand::where('name','like',"$name")->get()' ** Importante: Quando for utilizar uma variavel, utilizar aspas dupla para o Tiker entender que é pra procurar pelo valor que esta dentro da variavel, se colocar aspas simples, o Tiker vai procurar pela palavra dentro das aspas '$name' e não pelo valor que esta dentro da variavel.
+
+
+
+
+
