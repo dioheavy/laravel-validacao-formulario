@@ -1,6 +1,6 @@
 Projetos Laravel serão salvos na pasta 'D:\Laravel'
 
-Criando um projeto Laravel::
+Criando um projeto Laravel:
 Abrir o Windows PowerShell
 Navegar até a pasta 'D:\Laravel'
 Digita ro comando: laravel new nome-do-projeto
