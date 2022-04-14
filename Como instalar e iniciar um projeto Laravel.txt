@@ -1,11 +1,23 @@
 Projetos Laravel serão salvos na pasta 'D:\Laravel'
 
-Criando um projeto Laravel:
-Abrir o Windows PowerShell
+*** Criando um projeto Laravel:***
+
+Abrir o Windows PowerShell 'Obs.. pode ser criado dentro do VS Code utilizando o Terminal powershell'
 Navegar até a pasta 'D:\Laravel'
-Digita ro comando: laravel new nome-do-projeto
+Digitar o comando: laravel new nome-do-projeto
 Ex: laravel new projeto-inicial
+Outro exemplo: composer create-project --prefer-dist "laravel/laravel" projeto-cadastro
+
 * Sera criada uma pasta dentro de Laravel com o nome projeto-inicial contendo todos os arquivos do laravel
+
+Instalar as Dependencias:
+Acessar a pasta do projeto atraves do terminal powershell ex: projeto-cadastro e digitar o comando: npm install
+
+Atualizar as variaveis de stilos/ sass / js
+comando: npm run dev
+* Sera criado os arquivos na public /js/app.js e css/app.css
+
+************************************
 
 Para testar, é preciso iniciar o php artisan server
 Dentro do Windows PowerShell, prompet de comando ou no Terminal do VS Code, acesse a pasta do projeto onde foi criado o projeto laravel exemplo D:\Laravel\projeto-laravel e digite o comando:
@@ -25,9 +37,11 @@ Fonte: https://laracasts.com/discuss/channels/laravel/php-artisan-preset-dont-wo
 
 ** importante:
 Para o bootstrap no Laravel Versão 6.0 em diante, é necessário instalar um pacote chamando laravel-ui dentro da pasta do projeto:
+Obs. com o terminal powershell acesse a pasta do projeto e digite os comandos abaixo:
 composer require laravel/ui
 php artisan ui bootstrap
-npm install && npm run dev
+npm install  
+npm run dev
 
 
 

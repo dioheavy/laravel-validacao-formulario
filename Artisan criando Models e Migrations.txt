@@ -1,0 +1,7 @@
+No Terminal powershell digitar o comando
+
+php artisan make:model digitar-nome-da-model -m
+
+** Será criado o arquivo com o nome que vc escolheu dentro da pasta app\Models
+
+* Será criado a migration com o nome que vc digitou dento da pasta database\migrations

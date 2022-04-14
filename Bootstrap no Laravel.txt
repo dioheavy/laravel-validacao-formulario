@@ -1,0 +1,13 @@
+
+Abra o terminal na pasta do projeto
+
+Digitar os comandos:
+1 - php artisan preset bootstrap
+	(Obs. Este comando é utilizado em versões do Laravel abaixo da 6.0, em casao de versão igual ou superior a 6.0 utilize os comandos seguintes )
+
+*** Para o Laravel Versão 6.0 em diante, é necessário instalar um pacote chamando laravel-ui:
+
+2 - composer require laravel/ui
+3 - php artisan ui bootstrap 
+4 - npm install  
+5 - npm run dev
