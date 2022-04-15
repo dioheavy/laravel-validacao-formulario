@@ -1,0 +1,29 @@
+Para criar as rotas, é preciso editar o arquivo web.php que esta dentro da pasta 'routes'
+
+Exemplo de rota apontando para o index '/' raiz
+
+Route::get('/', function(){ return view('index')})   // Aponta para resources\views\index.blade.php
+
+Exemplo de rota apontando para uma controladora
+
+** - O primeiro parametro é o end que sera digitado na url para acessar uma determinada pagina
+** - O segundo parametro aponta para uma controladora que esta na pasta App\Http\Controllers e chama uma function index() '@index' que esta dentro do controlador 'ControladorProduto' que retorna uma view categorias.blade.php que esta dentro da pasta ResourcesViews Ex:
+
+Route::get('/categorias','ControladorCategoria@index'});
+
+    public function index()
+    {
+        return view('categorias');
+    }
+
+IMPORTANTE: No laravel 8 é preciso colocar o caminho absoluto do controllador no arquivo web.php
+
+EX: Route::get('/categorias','App\Http\Controllers\ControladorCategoria@index');
+
+Exemplo com parametros:
+Route::get('multiplicar/{n1}/{n2}','App\Http\Controllers\MeuControlador@multiplicar'); // Passando 2 parametros
+
+//Fonte:https://mazer.dev/como-corrigir-o-erro-target-class-does-not-exist-no-laravel-8/
+
+** Importante.. quando a rota estiver apontando para o caminho certo, e mesmo assim for exibido erro dizendo que não encontrou a view, abra o arquivo da view, deleta o codigo e coloca uma tag simples html só pra ver se o conteúdo vai ser exibido... Algumas vezes a rota não funciona por conta do codigo que extente uma layout.blade.. 
+

@@ -1,0 +1,7 @@
+Para criar um controlador, digitar o seguinte comando no powershell
+
+php artisan make:controller nome-do-controlador --resource
+
+** --resource cria as funções dentro do controlador
+
+Após executar o comando, sera criado um arquivo .php com o nome escolhido dentro da pasta App\Http\Controllers

@@ -1,4 +1,115 @@
 Abrir a pasta do projeto  no ex. projeto-inicial e editar o arquivo .env
 
 *** Importante *** 
-Em alguns casos nas versões mais antigas do laravel, esse arquivo pode estar dentro da pasta tests no caso da versão 5.8 do laravel 
+Neste arquivo é prenchido as informações do banco de dados Ex:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=vendas
+DB_USERNAME=root
+DB_PASSWORD=mysql
+
+**** COMO O LARAVEL SALVA AS INFORMAÇÕES NO BANCO DE DADOS ****
+
+View -> Controller -> Model 'acessa o BD e retorna '->  Controler -> View
+
+1 - Quando cria uma Model, automaticamente é criado um arquivo migration, a migration tem a função up() que é responsavel por criar tabela e também inserir dados nesta tabela, é nesta funçaõ que devemos incluir nossas querys ou sql com comandos php
+
+2 - Quando criamos um formulário com o metodo POST e action apontando para uma rota configurada no arquivo web.php e nesta rota é inserida a chamada do metodo POST, passamos o caminho do controlador ex. 'Route::post('/categorias','App\Http\Controllers\ControladorCategoria@store')' e chamamos o metodo store que esta dentro do controlador 'ControladorCategoria', esse metodo é responsavel por gravar os dados na tabela 
+-> Obs. não esquecer de incluir o metodo 'use' chamando a model responsavel por este controlador
+
+Ex: use App\Models\Categoria; este codigo foi incluído dentro o controlador 'controladorCategoria.php'
+
+Mapa Passo a Passo de como chamar um formulário e gravar os dados
+
+1 - É preciso ter a Model ja criada juntamente com a Migration
+2 - Na migration, ja deve ter as informações da tabela que sera criada/atualizada
+3 - Ja ter uma View que aponta para uma pagina ex.. categorias
+4 - No arquivo web.php é preciso configurar uma rota para o metodo create do controlador ex:
+	Route::get('/categorias/novo','App\Http\Controllers\ControladorCategoria@create');
+
+5 - Na Controler, dentro do metodo create é preciso criar um return view para a view que vai conter o formulário
+6 - Na view que contem o formulário, é preciso incluir a metodo POST, e action informar para qual pagina os dados sera enviado neste exemplo sera action="/categorias"
+7 - No imput do formulário o campo mais importante é o 'name', é por este name que vamos identificar o campo que queremos resgatar obs. não esquecer de incluir acima do campo input a verificação do token do Laravel que é a função @csrf 'responsavel por criar um campo hidden com um token'
+8 - Para resgatar os dados desse formulário, precisamos criar uma rota com o Metodo POST e apontar na controladora o metodo que vamos utilizar que sera o store EX:
+	Route::post('/categorias','App\Http\Controllers\ControladorCategoria@store');
+9 - Neste exemplo acessa o controlador 'ControladorCategoria' e incluir o comando 'use' referenciando a Model 'Categoria' ex?
+	use App\Models\Categoria;
+10 - Ainda na controladora 'ControladorCategoria' dentro do metodo store() instanciar um objeto resgatando os dados do campo imput e gravar as informações no banco através do metodo save() Ex:
+    public function store(Request $request)
+    {
+        $cat = new Categoria();
+        $cat->nome = $request->input('nomeCategoria');
+        $cat->save();
+        return redirect('/categorias');// Retorna para a view categorias.blade.php
+    }
+
+** Obs. Assim que acessar a pagina categoria/novo e preencher o formulário, ao clicar no btn salvar, o metodo store() é executado, resgatando a informação contida na input com name="nomeCategoria", e armazenando na variavel 'nome', em seguida o metodo save() é executado, esse metodo vai passar a informação da variavel 'nome' para a migration que foi criada junto da model Categoria.php essa migration vai executar o metodo up() gravando a informação dentro da tabela 'categorias'.
+
+
+**** Recuperando registros do Banco de Dados ****
+
+1 - Pegando como exemplo ainda a tabela categorias, dentro da controller 'ControladorCategoria' no metodo index(), vamos chamar o metodo all(), esse metodo vai retornar todos os registros da tabela, exemplo:
+
+    public function index()
+    {
+        $cats = Categoria::all(); // Esse metodo 'Categoria' é referencia a chamada da Model 'use App\Models\Categoria;' que esta no inicio do arquivo
+        return view('categorias' , compact('cats')); // Esse return, envia para a view categorias um array 'cats[]' de forma compactada
+    }
+
+2 - E para exibir o resultado, sera criado uma tabela na view categorias.blade.php  com um loop foreach ex:
+
+                    @foreach ($cats as $cat)
+                        <tr>
+                            <td>{{$cat->id}}</td>
+                            <td>{{$cat->nome}}</td>
+                            <td>
+                                <a href="/categorias/editar/{{$cat->id}}" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="/categorias/apagar/{{$cat->id}}" class="btn btn-sm btn-danger">Apagar</a>
+                            </td>
+                        </tr>
+                    @endforeach
+
+**** Editando um registro com o metodo Edit da Controladora ****
+
+1 - Criar uma rota no web.php apontando para a controladora chamando o metodo edit()
+	Route::get('/categorias/editar/{id}','App\Http\Controllers\ControladorCategoria@edit');
+
+2 - Dentro da controladora 'ControladorCategoria' editar o metodo edit() resgatando os registros por meio do id EX:
+
+    public function edit($id)
+    {
+        $cat = Categoria::find($id); // a variavel $cat vai receber o conteudo retornado pelo metodo find()
+        if(isset($cat)){ //verifica se existe o conteúdo com o metodo isset()
+            return view('editarcategoria', compact('cat')); // retorna para a view editarcategoria.blade.php o objeto cat
+        }
+        return redirect('/categorias');
+    }
+3 - Dentro do form, incluir na rota da action o id do registro Ex:
+	action="/categorias/{{$cat->id}}"
+
+**Obs. Sera preciso também criar uma rota enviando o id do registro, apontando para a controladora chamando o metodo update() que sera o responsável por atualizar o registro:
+	Route::post('/categorias/{id}','App\Http\Controllers\ControladorCategoria@update');
+
+4 - Dentro da view 'editarcategoria' no campo input do formulário, para exibir o valor retornado basta inclur a seguinte propriedade////////; value="{{$cat->nome}}" sendo que $cart->nome preenche o campo 'value' com o registro retornado
+
+
+**** Deletando um registro com o metodo Destroy da Controladora ****
+
+1 - Rota simples para apagar um registro utilizando o metodo destroy do controller 'ControladorCategoria' Ex:
+	Route::get('/categorias/apagar/{id}','App\Http\Controllers\ControladorCategoria@destroy');
+
+**Obs. No arquivo categorias.blade.php na lista de registro no btn Apagar é passado uma rota juntamente com o id do registro, esse id é recuperado pela função destroy($id) EX:
+
+    public function destroy($id)
+    {
+        $cat = Categoria::find($id); // a variavel $cat vai receber o conteudo retornado pelo metodo find()
+        if (isset($cat)){ //verifica se existe o conteúdo com o metodo isset()
+            $cat->delete(); // se existir, ou seja se estiver setado, deleta
+        }
+        return redirect('/categorias');
+    }
+
+
+ 
