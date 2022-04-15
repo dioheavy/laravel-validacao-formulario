@@ -8,13 +8,13 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a @if($current =="home") class="nav-link active" @else class="nav-link" @endif href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/produtos">Produtos</a>
+            <a @if($current =="produtos") class="nav-link active" @else class="nav-link" @endif  href="/produtos">Produtos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/categorias">Categorias</a>
+            <a @if($current =="categorias") class="nav-link active" @else class="nav-link" @endif  href="/categorias">Categorias</a>
           </li>
         </ul>        
       </div>

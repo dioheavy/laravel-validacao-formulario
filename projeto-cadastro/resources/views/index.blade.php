@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ["current" => "home"])
 
 @section('body')
     <div class="jumbotron bg-light border border-secundary">
@@ -21,7 +21,7 @@
                         <p class="card-text">
                             Cadastre as categorias do seus produtos
                         </p>
-                        <a href="/produtos" class="btn btn-primary">Cadastre suas categorias</a>
+                        <a href="/categorias" class="btn btn-primary">Cadastre suas categorias</a>
                     </div>
                 </div>
 
